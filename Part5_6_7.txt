@@ -1,0 +1,23 @@
+Part 5:
+INSERT INTO country
+VALUES(NULL,32.32,2,'UR Mom');
+
+INSERT INTO country
+VALUES(22,32.35,'Denver')
+
+INSERT INTO country
+VALUES('Aurstralia',23.59,0,'Ange Postecoglou')
+
+Part 6:
+DELETE FROM country
+WHERE Country_name="Australia"
+
+Part 7:
+INSERT INTO country
+VALUES("Laos",999.9,600,'Brandon Chansamone');
+
+INSERT INTO players
+VALUES(123456,'Asia Keomanivong','Asia','Keomanivong','2020-10-03','USA',NULL,NULL,NULL,NULL,NULL);
+
+INSERT INTO player_cards
+VALUES(224324,5,32)

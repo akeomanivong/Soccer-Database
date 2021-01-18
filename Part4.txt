@@ -1,0 +1,286 @@
+Q1:
+127.0.0.1/soc/players/		http://localhost:8080/phpmyadmin/db_sql.php?db=soc
+ Showing rows 0 - 10 (11 total, Query took 0.0021 seconds.)
+
+SELECT Name,Club,Position FROM players WHERE country='USA'
+
+
+Name	Club	Position	
+DAMARCUS BEASLEY	Puebla FC	Defender	
+BRAD DAVIS	Houston Dynamo	Midfielder	
+CLINT DEMPSEY	Seattle Sounders FC	Forward	
+BRAD GUZAN	Aston Villa FC	Goalkeeper	
+ALEJANDRO BEDOYA	FC Nantes	Midfielder	
+FABIAN JOHNSON	TSG 1899 Hoffenheim	Defender	
+GEOFF CAMERON	Stoke City FC	Defender	
+CHRIS WONDOLOWSKI	San Jose Earthquakes	Forward	
+GRAHAM ZUSI	Sporting Kansas City	Midfielder	
+ARON JOHANNSSON	AZ Alkmaar	Forward	
+DEANDRE YEDLIN	Seattle Sounders FC	Defender	
+
+Q2:
+127.0.0.1/soc/country/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=players
+ Showing rows 0 -  7 (8 total, Query took 0.0023 seconds.)
+
+SELECT Country_NAME
+FROM country
+WHERE NO_of_Worldcup_won>=1
+
+
+Country_NAME	
+Argentina	
+Brazil	
+England	
+France	
+Germany	
+Italy	
+Spain	
+Uruguay	
+
+Q3:
+127.0.0.1/soc/country/		http://localhost:8080/phpmyadmin/db_sql.php?db=soc
+ Showing rows 0 - 23 (24 total, Query took 0.0017 seconds.)
+
+SELECT
+    Country_NAME
+FROM
+    country
+WHERE
+    NO_of_Worldcup_won = 0
+
+
+Country_NAME	
+Algeria	
+Australia	
+Belgium	
+Bosnia & Herzegovina	
+Cameroon	
+Chile	
+Columbia	
+Costa Rica	
+Croatia	
+Ecuador	
+Ghana	
+Greece	
+Honduras	
+Iran	
+Ivory Coast	
+Japan	
+Mexico	
+Netherlands	
+Nigeria	
+Portugal	
+Russia	
+South Korea	
+Switzerland	
+USA	
+
+Q4:
+127.0.0.1/soc/country/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=country
+ Showing rows 0 -  0 (1 total, Query took 0.0069 seconds.)
+
+SELECT NAME
+    ,
+    Country_Name,MAX(Yellow_Cards)
+FROM
+    players AS p,
+    country AS c,
+    player_cards AS pc
+WHERE
+    p.Country = c.Country_Name AND p.Player_id = pc.Player_id
+
+
+
+DJAMEL MESBAH	Algeria	2	
+
+Q5:
+127.0.0.1/soc/country/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=country
+ Showing rows 0 -  0 (1 total, Query took 0.0069 seconds.)
+
+SELECT NAME
+    ,
+    Country_Name,MAX(Yellow_Cards)
+FROM
+    players AS p,
+    country AS c,
+    player_cards AS pc
+WHERE
+    p.Country = c.Country_Name AND p.Player_id = pc.Player_id
+
+
+
+DJAMEL MESBAH	Algeria	2
+	
+Q6:
+127.0.0.1/soc/match_results/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=match_results
+ Showing rows 0 - 24 (32 total, Query took 0.0038 seconds.)
+
+SELECT Country_Name, COUNT(*),SUM(mr.Team1_score),SUM(mr.Team2_score) From country as c, match_results as mr WHERE mr.Team1=c.Country_Name GROUP BY Country_Name
+
+
+Country_Name	COUNT(*)	SUM(mr.Team1_score)	SUM(mr.Team2_score)	
+Algeria	1	1	1	
+Argentina	4	5	1	
+Australia	2	2	6	
+Belgium	3	5	2	
+Bosnia & Herzegovina	1	3	1	
+Brazil	6	7	13	
+Cameroon	2	1	8	
+Chile	1	3	1	
+Columbia	3	7	1	
+Costa Rica	2	1	1	
+Croatia	1	1	3	
+Ecuador	1	0	0	
+England	1	1	2	
+France	3	5	1	
+Germany	4	9	3	
+Ghana	1	1	2	
+Greece	1	2	1	
+Honduras	2	1	5	
+Iran	1	0	0	
+Italy	2	0	2	
+Ivory Coast	1	2	1	
+Japan	2	1	4	
+Mexico	1	1	0	
+Netherlands	4	4	1	
+Nigeria	2	3	3	
+
+Q7:
+127.0.0.1/soc/match_results/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=match_results
+ Showing rows 0 - 24 (32 total, Query took 0.0037 seconds.)
+
+SELECT
+    Country_Name,
+    COUNT(*),
+    SUM(mr.Team2_score),
+    SUM(mr.Team1_score)
+FROM
+    country AS c,
+    match_results AS mr
+WHERE
+    mr.Team1 = c.Country_Name
+GROUP BY
+    Country_Name
+
+
+Country_Name	COUNT(*)	SUM(mr.Team2_score)	SUM(mr.Team1_score)	
+Algeria	1	1	1	
+Argentina	4	1	5	
+Australia	2	6	2	
+Belgium	3	2	5	
+Bosnia & Herzegovina	1	1	3	
+Brazil	6	13	7	
+Cameroon	2	8	1	
+Chile	1	1	3	
+Columbia	3	1	7	
+Costa Rica	2	1	1	
+Croatia	1	3	1	
+Ecuador	1	0	0	
+England	1	2	1	
+France	3	1	5	
+Germany	4	3	9	
+Ghana	1	2	1	
+Greece	1	1	2	
+Honduras	2	5	1	
+Iran	1	0	0	
+Italy	2	2	0	
+Ivory Coast	1	1	2	
+Japan	2	4	1	
+Mexico	1	0	1	
+Netherlands	4	1	4	
+Nigeria	2	3	3	
+
+Q8:
+127.0.0.1/soc/match_results/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=match_results
+ Showing rows 0 -  6 (7 total, Query took 0.0067 seconds.)
+
+SELECT Match_id
+From match_results
+WHERE Team1='Brazil' OR Team2='Brazil'
+
+
+Match_id	
+1	
+17	
+33	
+49	
+57	
+61	
+63	
+
+Q9:
+127.0.0.1/soc/match_results/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=match_results
+ Showing rows 0 - 24 (42 total, Query took 0.0035 seconds.) [Goals: 3... - 1...]
+
+SELECT NAME
+    ,
+    Country,
+    Goals
+FROM
+    players AS p,
+    player_assists_goals AS pag
+WHERE
+    p.Player_id = pag.Player_id AND pag.Goals >= 1
+ORDER BY
+    pag.Goals
+DESC
+
+
+NAME	Country	Goals   	
+ARJEN ROBBEN	Netherlands	3	
+ENNER VALENCIA	Ecuador	3	
+ANDRE SCHUERRLE	Germany	3	
+ABDELMOUMENE DJABOU	Algeria	2	
+ALEXIS SANCHEZ	Chile	2	
+AHMED MUSA	Nigeria	2	
+GERVINHO YAO KOUASSI	Ivory Coast	2	
+DAVID LUIZ	Brazil	2	
+BRYAN RUIZ	Costa Rica	2	
+CLINT DEMPSEY	USA	2	
+ASAMOAH GYAN	Ghana	2	
+ANDRE AYEW	Ghana	2	
+DANIEL STURRIDGE	England	1	
+HARIS SEFEROVIC	Switzerland	1	
+GRANIT XHAKA	Switzerland	1	
+CHARLES ARANGUIZ	Chile	1	
+DRIES MERTENS	Belgium	1	
+ANDREAS SAMARIS	Greece	1	
+ALEXANDER KOKORIN	Russia	1	
+BLAISE MATUIDI	France	1	
+DALEY BLIND	Netherlands	1	
+GEORGINIO WIJNALDUM	Netherlands	1	
+ADMIR MEHMEDI	Switzerland	1	
+DIVOCK ORIGI	Belgium	1	
+FERNANDO TORRES	Spain	1	
+
+Q10:
+127.0.0.1/soc/match_results/		http://localhost:8080/phpmyadmin/tbl_sql.php?db=soc&table=match_results
+ Showing rows 0 - 11 (12 total, Query took 0.0035 seconds.) [Goals: 3... - 2...]
+
+SELECT NAME
+    ,
+    Country,
+    Goals
+FROM
+    players AS p,
+    player_assists_goals AS pag
+WHERE
+    p.Player_id = pag.Player_id AND pag.Goals >= 2
+ORDER BY
+    pag.Goals
+DESC
+
+
+NAME	Country	Goals   	
+ANDRE SCHUERRLE	Germany	3	
+ARJEN ROBBEN	Netherlands	3	
+ENNER VALENCIA	Ecuador	3	
+ABDELMOUMENE DJABOU	Algeria	2	
+AHMED MUSA	Nigeria	2	
+CLINT DEMPSEY	USA	2	
+ASAMOAH GYAN	Ghana	2	
+BRYAN RUIZ	Costa Rica	2	
+ALEXIS SANCHEZ	Chile	2	
+DAVID LUIZ	Brazil	2	
+GERVINHO YAO KOUASSI	Ivory Coast	2	
+ANDRE AYEW	Ghana	2	
